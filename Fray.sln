@@ -9,6 +9,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fray.Test", "Fray.Test\Fray
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fray", "Fray\Fray.fsproj", "{657669BE-4273-4E98-B78B-956F1D71C166}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fray.Command", "Fray.Command\Fray.Command.fsproj", "{1C933BA2-D63D-45B0-9654-B88C331151C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{657669BE-4273-4E98-B78B-956F1D71C166}.Release|x64.Build.0 = Release|Any CPU
 		{657669BE-4273-4E98-B78B-956F1D71C166}.Release|x86.ActiveCfg = Release|Any CPU
 		{657669BE-4273-4E98-B78B-956F1D71C166}.Release|x86.Build.0 = Release|Any CPU
+		{1C933BA2-D63D-45B0-9654-B88C331151C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C933BA2-D63D-45B0-9654-B88C331151C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C933BA2-D63D-45B0-9654-B88C331151C7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1C933BA2-D63D-45B0-9654-B88C331151C7}.Debug|x64.Build.0 = Debug|Any CPU
+		{1C933BA2-D63D-45B0-9654-B88C331151C7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1C933BA2-D63D-45B0-9654-B88C331151C7}.Debug|x86.Build.0 = Debug|Any CPU
+		{1C933BA2-D63D-45B0-9654-B88C331151C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C933BA2-D63D-45B0-9654-B88C331151C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C933BA2-D63D-45B0-9654-B88C331151C7}.Release|x64.ActiveCfg = Release|Any CPU
+		{1C933BA2-D63D-45B0-9654-B88C331151C7}.Release|x64.Build.0 = Release|Any CPU
+		{1C933BA2-D63D-45B0-9654-B88C331151C7}.Release|x86.ActiveCfg = Release|Any CPU
+		{1C933BA2-D63D-45B0-9654-B88C331151C7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
