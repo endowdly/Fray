@@ -1,13 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Acorn.fs" />
+    <Compile Include="Seed.fs" />
     <Compile Include="Root.fs" />
+    <Compile Include="Wrap.fs" />
   </ItemGroup>
 
 </Project>

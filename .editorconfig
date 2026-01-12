@@ -1,4 +1,4 @@
-﻿root = true
+root = true
 
 [*]
 charset = utf-8
@@ -24,4 +24,3 @@ fsharp_newline_between_type_definition_and_members     = false
 fsharp_space_before_member                             = true
 fsharp_space_before_semicolon                          = true
 fsharp_space_before_uppercase_invocation               = true
-

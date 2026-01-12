@@ -1,5 +1,4 @@
-[<CompiledName("Fray")>]
-module Root
+module internal Root
 
 open System
 
@@ -30,7 +29,7 @@ let toString (ls: char list) = ls |> List.rev |> List.toSeq |> String.Concat
 
 // Tail-recursive to keep one frame active; uses spans to be memory efficient
 // Does not check well for out of index errors on the span; relies on wrapping function to do that. Ew.
-let rec private getWords (input: char span) (currentWord: char list) (acc: string list) =
+let rec getWords (input: char span) (currentWord: char list) (acc: string list) =
     let wordWith char = char :: currentWord
     let push word = toString word :: acc
 
@@ -51,40 +50,34 @@ let rec private getWords (input: char span) (currentWord: char list) (acc: strin
         | Delimiter -> getWords (Span.tail input) [] (push currentWord)
         | Normal -> getWords (Span.tail input) (wordWith currentChar) acc
 
-
-[<CompiledName("Invoke")>]
 let transform (input: string) (targetCase: Case) =
     if String.isEmpty input then
         String.Empty
     else
-
         let words = getWords (String.asSpan input) [] []
 
-        let f words =
-            match targetCase with
-            | Kebab ->
-                words
-                |> List.map String.toLower
-                |> String.concat kebabConnector
-            | Snake ->
-                words
-                |> List.map String.toLower
-                |> String.concat snakeConnector
-            | Constant ->
-                words
-                |> List.map String.toUpper
-                |> String.concat snakeConnector
-            | Pascal ->
-                words
-                |> List.map String.asTitle
-                |> String.concat String.Empty
-            | Camel ->
-                match words with
-                | firstWord :: rest ->
-                    String.toLower firstWord
-                    + (rest
-                       |> List.map String.asTitle
-                       |> String.concat String.Empty)
-                | _ -> String.Empty
-
-        f words
+        match targetCase with
+        | Kebab ->
+            words
+            |> List.map String.toLower
+            |> String.concat kebabConnector
+        | Snake ->
+            words
+            |> List.map String.toLower
+            |> String.concat snakeConnector
+        | Constant ->
+            words
+            |> List.map String.toUpper
+            |> String.concat snakeConnector
+        | Pascal ->
+            words
+            |> List.map String.asTitle
+            |> String.concat String.Empty
+        | Camel ->
+            match words with
+            | firstWord :: rest ->
+                String.toLower firstWord
+                + (rest
+                   |> List.map String.asTitle
+                   |> String.concat String.Empty)
+            | _ -> String.Empty

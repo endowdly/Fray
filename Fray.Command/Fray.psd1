@@ -9,7 +9,7 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = 'InvokeFrayCommand.dll'
+RootModule = 'Fray.Command.dll'
 
 # Version number of this module.
 ModuleVersion = '0.0.1'
@@ -18,13 +18,13 @@ ModuleVersion = '0.0.1'
 # CompatiblePSEditions = @()
 
 # ID used to uniquely identify this module
-GUID = '7eff0d96-0754-4ec3-9fda-c585565b3eea'
+GUID = '85bf3fb8-3410-450a-851f-85b92ca58700'
 
 # Author of this module
 Author = 'Endowdly'
 
 # Company or vendor of this module
-CompanyName = ''
+CompanyName = 'Unknown'
 
 # Copyright statement for this module
 Copyright = '(c) Endowdly. All rights reserved.'
@@ -54,7 +54,7 @@ Copyright = '(c) Endowdly. All rights reserved.'
 # RequiredModules = @()
 
 # Assemblies that must be loaded prior to importing this module
-# RequiredAssemblies = @()
+RequiredAssemblies = '.\FSharp.Core.dll'
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 # ScriptsToProcess = @()
@@ -69,17 +69,16 @@ Copyright = '(c) Endowdly. All rights reserved.'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = ''
+# FunctionsToExport = '*'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = 'Invoke-Fray'
 
 # Variables to export from this module
-VariablesToExport = ''
+# VariablesToExport = '*'
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-AliasesToExport = ''
-
+# AliasesToExport = '*'
 # DSC resources to export from this module
 # DscResourcesToExport = @()
 
@@ -87,7 +86,7 @@ AliasesToExport = ''
 # ModuleList = @()
 
 # List of all files packaged with this module
-FileList = @('InvokeFrayCommand.dll')
+# FileList = @()
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{
@@ -95,7 +94,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = @('strings', 'transform')
+        # Tags = @()
 
         # A URL to the license for this module.
         # LicenseUri = ''

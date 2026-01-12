@@ -1,5 +1,4 @@
-open Root
-
+open Fray
 open System
 open System.CommandLine
 open System.CommandLine.Invocation
@@ -12,6 +11,8 @@ let addOption opt (command: Command) =
     command.Options.Add opt
     command
 
+let addSet ([<ParamArray>] args: string array) (opt: string clioption) = opt.AcceptOnlyFromAmong args
+
 let addArgument arg (command: Command) =
     command.Arguments.Add arg
     command
@@ -20,21 +21,20 @@ let setAction (f: ParseResult action) (command: Command) =
     command.SetAction f
     command
 
-let defaultCase _ = Kebab
+let defaultCase _ = "kebab"
 
 [<EntryPoint>]
 let main argv =
-
     let inputArg =
         argument<string> ("input", Description = "The input string to Fray or change.")
     let caseOpt =
-        clioption<Case> (
+        clioption<string> (
             "--case",
             Description = "The target case to Fray the input string to.",
             DefaultValueFactory = defaultCase,
             aliases = [| "-c" |]
         )
-
+        |> addSet (Fray.GetCaseNames ())
     let frayHandler (pr: ParseResult) =
         let inputVal =
             if Console.IsInputRedirected then
@@ -42,8 +42,7 @@ let main argv =
             else
                 pr.GetValue inputArg
         let caseVal = pr.GetValue caseOpt
-        let result = transform inputVal caseVal
-
+        let result = Fray.Invoke (inputVal, caseVal)
         printfn "%s" result
 
     let rootCommand =

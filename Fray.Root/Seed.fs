@@ -1,5 +1,5 @@
 [<AutoOpen>]
-module Seed
+module internal Seed
 
 open System
 
