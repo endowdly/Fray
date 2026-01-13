@@ -8,10 +8,11 @@ open System.Management.Automation
 type InvokeFrayCommand() =
     inherit PSCmdlet()
 
-    [<Parameter(ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)>]
+    [<Parameter(ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, Position = 0)>]
     member val InputObject: obj = "" with get, set
 
     [<Parameter>]
+    [<Alias("Case")>]
     member val TargetCase: Case = Case.Kebab with get, set
 
     override this.BeginProcessing () : unit = base.BeginProcessing ()
