@@ -1,9 +1,13 @@
 root = true
 
 [*]
-charset = utf-8
-insert_final_newline = true
+charset                  = utf-8
+insert_final_newline     = true
 trim_trailing_whitespace = true
+
+[*.ps{1,d1}]
+indent_style = space
+indent_size  = 4
 
 [*.{fs,fsx,fsi}]
 fsharp_blank_lines_around_nested_multiline_expressions = false

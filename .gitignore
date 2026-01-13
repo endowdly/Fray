@@ -3,6 +3,9 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+# Do not copy Distributables
+Dist/
+
 # dotenv files
 .env
 
