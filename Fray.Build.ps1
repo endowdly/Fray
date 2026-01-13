@@ -12,18 +12,15 @@ task ShowRoot {
     }
 }
 
+$modulesPath = split-path $profile | join-path -child modules
+
 task Test {
     exec { dotnet test --logger console -v m }
 }
 
 task Clean {
     exec { dotnet clean }
-    remove Dist
-}
-
-task SetModulesPath -Before Install, Reinstall {
-    $modulesPath = split-path $profile | join-path -child modules
-    requires -path $modulesPath
+    remove dist
 }
 
 task Build Test, Clean, {
@@ -31,12 +28,20 @@ task Build Test, Clean, {
     exec { dotnet publish Fray.Command -c release -v m -o .\dist\fray }
 }
 
-task Install Build, {
-    copy .\dist\fray\ -destination $modulesPath -recurse -ea silentlycontinue
+task Cmdlet Build, {
+    copy .\dist\fray -destination $modulesPath -recurse -ea silentlycontinue
+}
+
+task ReCmdlet Build, {
+    print 'Force copy module' -color magenta
+    copy .\dist\fray\ -destination $modulesPath -recurse -force
+}
+
+task Exe Build, {
     exec { dotnet tool install -v m -g --add-source .\dist\nupkg fray }
 }
 
-task Reinstall Build, {
+task ReExe Build, {
     if (command 'fray.exe' -commandtype application -ea silentlycontinue) {
         print 'Uninstall old fray' -color magenta
         exec { dotnet tool uninstall -g fray }
@@ -44,9 +49,8 @@ task Reinstall Build, {
 
     print 'Install fray tool' -color magenta
     exec { dotnet tool install -v m -g --add-source .\dist\nupkg fray }
-    print 'Force copy module' -color magenta
-    copy .\dist\fray\ -destination $modulesPath -recurse -force
-
 }
 
+task Install Cmdlet, Exe
+task Reinstall ReCmdlet, ReExe
 task . ShowRoot
