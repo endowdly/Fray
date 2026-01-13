@@ -22,11 +22,20 @@ let setAction (f: ParseResult action) (command: Command) =
     command
 
 let defaultCase _ = "kebab"
+let defaultInput _ =
+    if Console.IsInputRedirected then
+        Console.In.ReadToEnd().Trim ()
+    else
+        String.Empty
 
 [<EntryPoint>]
 let main argv =
     let inputArg =
-        argument<string> ("input", Description = "The input string to Fray or change.")
+        argument<string> (
+            "input",
+            Description = "The input string to Fray or change.",
+            DefaultValueFactory = defaultInput
+        )
     let caseOpt =
         clioption<string> (
             "--case",
@@ -36,11 +45,7 @@ let main argv =
         )
         |> addSet (Fray.GetCaseNames ())
     let frayHandler (pr: ParseResult) =
-        let inputVal =
-            if Console.IsInputRedirected then
-                Console.In.ReadToEnd().Trim ()
-            else
-                pr.GetValue inputArg
+        let inputVal = pr.GetValue inputArg
         let caseVal = pr.GetValue caseOpt
         let result = Fray.Invoke (inputVal, caseVal)
         printfn "%s" result

@@ -1,5 +1,6 @@
 module internal Root
 
+open Seed
 open System
 
 let (|Acronym|Transition|Normal|Delimiter|) (input: char span) =

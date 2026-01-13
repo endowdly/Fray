@@ -1,4 +1,3 @@
-[<AutoOpen>]
 module internal Seed
 
 open System

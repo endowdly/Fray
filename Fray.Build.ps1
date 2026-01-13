@@ -7,13 +7,13 @@
 
 task ShowRoot {
     if ($BuildRoot -eq (Location).Path) {
-        print 'the build root is:' -color magenta
+        print 'The build root is:' -color magenta
         (Location).Path
     }
 }
 
 task Test {
-    exec { dotnet test --logger console --verbosity minimal }
+    exec { dotnet test --logger console -v m }
 }
 
 task Clean {
@@ -21,15 +21,32 @@ task Clean {
     remove Dist
 }
 
+task SetModulesPath -Before Install, Reinstall {
+    $modulesPath = split-path $profile | join-path -child modules
+    requires -path $modulesPath
+}
+
 task Build Test, Clean, {
-    exec { dotnet publish Fray -c release -o .\Dist }
-    exec { dotnet publish Fray.Command -c release -o .\Dist\Fray }
+    exec { dotnet pack Fray -v m -c release -o .\dist\nupkg }
+    exec { dotnet publish Fray.Command -c release -v m -o .\dist\fray }
 }
 
 task Install Build, {
-    $modulesPath = split-path $profile | join-path -child modules
-    requires -path $modulesPath
-    copy .\Dist\Fray\ -destination $modulesPath -recurse
+    copy .\dist\fray\ -destination $modulesPath -recurse -ea silentlycontinue
+    exec { dotnet tool install -v m -g --add-source .\dist\nupkg fray }
+}
+
+task Reinstall Build, {
+    if (command 'fray.exe' -commandtype application -ea silentlycontinue) {
+        print 'Uninstall old fray' -color magenta
+        exec { dotnet tool uninstall -g fray }
+    }
+
+    print 'Install fray tool' -color magenta
+    exec { dotnet tool install -v m -g --add-source .\dist\nupkg fray }
+    print 'Force copy module' -color magenta
+    copy .\dist\fray\ -destination $modulesPath -recurse -force
+
 }
 
 task . ShowRoot
