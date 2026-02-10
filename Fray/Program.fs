@@ -11,7 +11,7 @@ let addOption opt (command: Command) =
     command.Options.Add opt
     command
 
-let addSet ([<ParamArray>] args: string array) (opt: string clioption) = opt.AcceptOnlyFromAmong args
+let addSet (args: string array) (opt: string clioption) = opt.AcceptOnlyFromAmong args
 
 let addArgument arg (command: Command) =
     command.Arguments.Add arg

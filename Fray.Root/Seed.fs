@@ -19,6 +19,7 @@ type Case =
     | Camel
 
 type 'a span = ReadOnlySpan<'a>
+type 'a memory = ReadOnlyMemory<'a>
 
 module Span =
     // These will throw exceptions if you are not careful! ...I should do some handling but eh.
